@@ -5,6 +5,8 @@ import kodlama.io.devs.bussiness.language.requests.UpdateLanguageRequest;
 import kodlama.io.devs.bussiness.language.responses.LanguageListResponse;
 import kodlama.io.devs.bussiness.language.responses.LanguageResponse;
 import kodlama.io.devs.bussiness.technology.TechnologyService;
+import kodlama.io.devs.bussiness.technology.responses.TechnologyListResponse;
+import kodlama.io.devs.bussiness.technology.responses.TechnologyResponse;
 import kodlama.io.devs.dataaccess.LanguageDao;
 import kodlama.io.devs.entities.Language;
 import kodlama.io.devs.entities.Technology;
@@ -34,11 +36,15 @@ public class LanguageManager implements LanguageService {
     checkNameEmptyControl(createLanguageRequest.getName());
     ArrayList<Technology> technologies = new ArrayList<>();
 
+    for (Integer id : createLanguageRequest.getTechnologyIds()){
+        Technology technologyById = technologyService.getTechnologyById(id);
+        technologies.add(technologyById);
+    }
 
     Language language = new Language();
     language.setId((int) Math.random());
-    language.setTechnologies(technologies);
     language.setName(createLanguageRequest.getName());
+    language.setTechnologies(technologies);
     this.languageDao.save(language);
     return createLanguageRequest;
   }
@@ -111,14 +117,23 @@ public class LanguageManager implements LanguageService {
   }
 
   @Override
-  public List<LanguageListResponse> getAll() {
+  public List<LanguageListResponse> getAll() throws Exception {
     List<Language> languageList = this.languageDao.findAll();
     List<LanguageListResponse> languageListResponses = new ArrayList<>();
+    List<TechnologyListResponse> technologyListResponses = new ArrayList<>();
     for (Language language : languageList) {
       LanguageListResponse languageListResponse = new LanguageListResponse();
       languageListResponse.setId(language.getId());
       languageListResponse.setName(language.getName());
       languageListResponses.add(languageListResponse);
+
+      for (Technology tech : language.getTechnologies()) {
+        TechnologyListResponse technologyListResponse = new TechnologyListResponse();
+        technologyListResponse.setId(this.technologyService.getTechnologyById(tech.getId()).getId());
+        technologyListResponse.setName(this.technologyService.getTechnologyById(tech.getId()).getName());
+        technologyListResponses.add(technologyListResponse);
+      }
+      languageListResponse.setTechnologyListResponses(technologyListResponses);
     }
     return languageListResponses;
   }

@@ -19,7 +19,7 @@ public interface LanguageService {
 
     LanguageResponse update(int id, UpdateLanguageRequest updateLanguageRequest) throws Exception;
 
-    List<LanguageListResponse> getAll();
+    List<LanguageListResponse> getAll() throws Exception;
 
     Language getLanguageById(int id);
 }

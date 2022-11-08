@@ -11,6 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateTechnologyRequest {
     private String name;
-    private int languageId;
 
 }

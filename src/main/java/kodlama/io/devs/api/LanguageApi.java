@@ -41,7 +41,7 @@ public class LanguageApi {
   }
 
   @GetMapping("/getAll")
-  List<LanguageListResponse> getAll(){
+  List<LanguageListResponse> getAll() throws Exception {
       return this.languageService.getAll();
   }
 }

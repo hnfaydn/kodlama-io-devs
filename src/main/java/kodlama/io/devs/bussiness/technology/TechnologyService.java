@@ -24,5 +24,5 @@ public interface TechnologyService {
 
     List<TechnologyListResponse> getAll();
 
-
+    Technology getTechnologyById(int id);
 }

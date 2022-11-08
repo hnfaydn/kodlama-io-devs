@@ -13,4 +13,6 @@ public class LanguageListResponse {
 
     private int id;
     private String name;
+
+    List<TechnologyListResponse> technologyListResponses;
 }

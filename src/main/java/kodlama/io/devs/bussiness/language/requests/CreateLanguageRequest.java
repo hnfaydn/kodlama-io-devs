@@ -11,4 +11,7 @@ import java.util.List;
 public class CreateLanguageRequest {
 
     private String name;
+
+    private List<Integer> technologyIds;
 }
+

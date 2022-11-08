@@ -15,5 +15,4 @@ public class TechnologyListResponse {
     private int id;
     private String name;
 
-    private LanguageResponse languageResponse;
 }

@@ -15,5 +15,4 @@ public class CreateTechnologyRequest {
 
     private String name;
 
-    private int languageId;
 }

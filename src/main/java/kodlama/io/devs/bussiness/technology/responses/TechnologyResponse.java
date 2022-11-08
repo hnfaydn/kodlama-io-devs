@@ -13,6 +13,4 @@ import lombok.Setter;
 public class TechnologyResponse {
     private String name;
 
-    private LanguageResponse languageResponse;
-
 }

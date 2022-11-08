@@ -12,5 +12,6 @@ import java.util.List;
 public class LanguageResponse {
 
     private String name;
+    List<TechnologyListResponse> technologyListResponses;
 
 }

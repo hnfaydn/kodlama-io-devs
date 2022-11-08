@@ -32,7 +32,6 @@ public class TechnologyManager implements TechnologyService{
 
         Technology technology = new Technology();
         technology.setId((int) Math.random());
-        technology.setLanguage(this.languageService.getLanguageById(createTechnologyRequest.getLanguageId()));
         technology.setName(createTechnologyRequest.getName());
         this.technologyDao.save(technology);
         return createTechnologyRequest;
@@ -74,11 +73,15 @@ public class TechnologyManager implements TechnologyService{
             technologyListResponse.setId(technology.getId());
             technologyListResponse.setName(technology.getName());
             technologyListResponses.add(technologyListResponse);
-            String name = this.languageService.getLanguageById(technology.getLanguage().getId()).getName();
-            languageResponse.setName(name);
-            technologyListResponse.setLanguageResponse(languageResponse);
         }
         return technologyListResponses;
+    }
+
+    @Override
+    public Technology getTechnologyById(int id) {
+
+        Optional<Technology> technology = this.technologyDao.findById(id);
+        return technology.get();
     }
 
 }
