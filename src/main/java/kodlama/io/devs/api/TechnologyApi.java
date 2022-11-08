@@ -8,11 +8,12 @@ import kodlama.io.devs.bussiness.technology.responses.TechnologyResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/api/technologies")
 public class TechnologyApi {
 
-  private TechnologyService technologyService;
+  private final TechnologyService technologyService;
 
   public TechnologyApi(TechnologyService technologyService) {
     this.technologyService = technologyService;

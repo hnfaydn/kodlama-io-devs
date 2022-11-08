@@ -10,6 +10,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateTechnologyRequest {
-    private String name;
-
+  private String name;
 }

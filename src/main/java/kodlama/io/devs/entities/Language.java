@@ -1,7 +1,10 @@
 package kodlama.io.devs.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,14 +18,13 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "Lazy"})
 public class Language {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id")
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "language_id")
+  private int id;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @OneToMany
-    private List<Technology> technologies;
+  @OneToMany private List<Technology> technologies;
 }

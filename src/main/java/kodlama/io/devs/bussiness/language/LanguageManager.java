@@ -6,7 +6,6 @@ import kodlama.io.devs.bussiness.language.responses.LanguageListResponse;
 import kodlama.io.devs.bussiness.language.responses.LanguageResponse;
 import kodlama.io.devs.bussiness.technology.TechnologyService;
 import kodlama.io.devs.bussiness.technology.responses.TechnologyListResponse;
-import kodlama.io.devs.bussiness.technology.responses.TechnologyResponse;
 import kodlama.io.devs.dataaccess.LanguageDao;
 import kodlama.io.devs.entities.Language;
 import kodlama.io.devs.entities.Technology;
@@ -19,9 +18,8 @@ import java.util.Optional;
 @Service
 public class LanguageManager implements LanguageService {
 
-  private LanguageDao languageDao;
-  private TechnologyService technologyService;
-
+  private final LanguageDao languageDao;
+  private final TechnologyService technologyService;
 
   public LanguageManager(LanguageDao languageDao, TechnologyService technologyService) {
     this.languageDao = languageDao;
@@ -36,9 +34,9 @@ public class LanguageManager implements LanguageService {
     checkNameEmptyControl(createLanguageRequest.getName());
     ArrayList<Technology> technologies = new ArrayList<>();
 
-    for (Integer id : createLanguageRequest.getTechnologyIds()){
-        Technology technologyById = technologyService.getTechnologyById(id);
-        technologies.add(technologyById);
+    for (Integer id : createLanguageRequest.getTechnologyIds()) {
+      Technology technologyById = technologyService.getTechnologyById(id);
+      technologies.add(technologyById);
     }
 
     Language language = new Language();
@@ -50,7 +48,7 @@ public class LanguageManager implements LanguageService {
   }
 
   private void checkNameEmptyControl(String name) throws Exception {
-    if(name == null || name==""){
+    if (name == null || name == "") {
       throw new Exception("name cannot null");
     }
   }
@@ -79,7 +77,7 @@ public class LanguageManager implements LanguageService {
   }
 
   private void checkIfIdValid(int id) throws Exception {
-    if(id<=0){
+    if (id <= 0) {
       throw new Exception("please enter an valid id");
     }
   }
@@ -87,12 +85,13 @@ public class LanguageManager implements LanguageService {
   private void checkIfIdDoesNotExist(int id) throws Exception {
     List<Language> languageList = this.languageDao.findAll();
 
-    for (Language languageForeach:languageList){
-      if(languageForeach.getId()!=id){
-        throw new Exception("there is no language with following id: "+id);
+    for (Language languageForeach : languageList) {
+      if (languageForeach.getId() != id) {
+        throw new Exception("there is no language with following id: " + id);
       }
     }
   }
+
   @Override
   public String delete(int id) throws Exception {
     checkIfIdDoesNotExist(id);
@@ -102,7 +101,8 @@ public class LanguageManager implements LanguageService {
   }
 
   @Override
-  public LanguageResponse update(int id, UpdateLanguageRequest updateLanguageRequest) throws Exception {
+  public LanguageResponse update(int id, UpdateLanguageRequest updateLanguageRequest)
+      throws Exception {
     checkIfIdDoesNotExist(id);
     checkNameDuplication(updateLanguageRequest.getName());
     checkNameEmptyControl(updateLanguageRequest.getName());
@@ -129,8 +129,10 @@ public class LanguageManager implements LanguageService {
 
       for (Technology tech : language.getTechnologies()) {
         TechnologyListResponse technologyListResponse = new TechnologyListResponse();
-        technologyListResponse.setId(this.technologyService.getTechnologyById(tech.getId()).getId());
-        technologyListResponse.setName(this.technologyService.getTechnologyById(tech.getId()).getName());
+        technologyListResponse.setId(
+            this.technologyService.getTechnologyById(tech.getId()).getId());
+        technologyListResponse.setName(
+            this.technologyService.getTechnologyById(tech.getId()).getName());
         technologyListResponses.add(technologyListResponse);
       }
       languageListResponse.setTechnologyListResponses(technologyListResponses);

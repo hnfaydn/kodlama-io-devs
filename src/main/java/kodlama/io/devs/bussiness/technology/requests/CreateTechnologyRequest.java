@@ -5,14 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateTechnologyRequest {
 
-    private String name;
-
+  private String name;
 }

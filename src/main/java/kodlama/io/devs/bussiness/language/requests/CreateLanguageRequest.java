@@ -1,6 +1,9 @@
 package kodlama.io.devs.bussiness.language.requests;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -10,8 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CreateLanguageRequest {
 
-    private String name;
+  private String name;
 
-    private List<Integer> technologyIds;
+  private List<Integer> technologyIds;
 }
-
