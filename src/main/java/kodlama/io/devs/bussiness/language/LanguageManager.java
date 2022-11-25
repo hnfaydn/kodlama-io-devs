@@ -30,18 +30,20 @@ public class LanguageManager implements LanguageService {
   public CreateLanguageRequest add(CreateLanguageRequest createLanguageRequest) throws Exception {
 
     //
-    checkNameDuplication(createLanguageRequest.getName());
-    checkNameEmptyControl(createLanguageRequest.getName());
+//    checkNameDuplication(createLanguageRequest.getName());
+//    checkNameEmptyControl(createLanguageRequest.getName());
+    Language language = new Language();
+    language.setId(0);
+    language.setName(createLanguageRequest.getName());
+
     ArrayList<Technology> technologies = new ArrayList<>();
 
     for (Integer id : createLanguageRequest.getTechnologyIds()) {
-      Technology technologyById = technologyService.getTechnologyById(id);
+      Technology technologyById = this.technologyService.getTechnologyById(id);
       technologies.add(technologyById);
     }
 
-    Language language = new Language();
-    language.setId((int) Math.random());
-    language.setName(createLanguageRequest.getName());
+
     language.setTechnologies(technologies);
     this.languageDao.save(language);
     return createLanguageRequest;
