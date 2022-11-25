@@ -27,11 +27,10 @@ public class LanguageManager implements LanguageService {
   }
 
   @Override
-  public CreateLanguageRequest add(CreateLanguageRequest createLanguageRequest) throws Exception {
+  public CreateLanguageRequest add(CreateLanguageRequest createLanguageRequest) {
 
-    //
-//    checkNameDuplication(createLanguageRequest.getName());
-//    checkNameEmptyControl(createLanguageRequest.getName());
+    nameControl(createLanguageRequest.getName());
+
     Language language = new Language();
     language.setId(0);
     language.setName(createLanguageRequest.getName());
@@ -43,11 +42,18 @@ public class LanguageManager implements LanguageService {
       technologies.add(technologyById);
     }
 
-
     language.setTechnologies(technologies);
     this.languageDao.save(language);
     return createLanguageRequest;
   }
+
+  private void nameControl(String name){
+    if(this.languageDao.existsByName(name)){
+      throw new RuntimeException("bu isim database'de var");
+    }
+  }
+
+
 
   private void checkNameEmptyControl(String name) throws Exception {
     if (name == null || name == "") {
@@ -105,6 +111,7 @@ public class LanguageManager implements LanguageService {
   @Override
   public LanguageResponse update(int id, UpdateLanguageRequest updateLanguageRequest)
       throws Exception {
+
     checkIfIdDoesNotExist(id);
     checkNameDuplication(updateLanguageRequest.getName());
     checkNameEmptyControl(updateLanguageRequest.getName());

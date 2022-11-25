@@ -10,4 +10,6 @@ public interface LanguageDao extends JpaRepository<Language, Integer> {
   // boolean existsByName(String name);
   //    boolean existsById(int id);
   // boolean existsByNameContainingIgnoreCase(String name);
+
+    boolean existsByName(String name);
 }
