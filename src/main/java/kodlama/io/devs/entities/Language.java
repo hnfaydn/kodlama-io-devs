@@ -18,13 +18,14 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "Lazy"})
 public class Language {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "language_id")
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "language_id")
+    private int id;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "name")
+    private String name;
 
-  @OneToMany private List<Technology> technologies;
+    @OneToMany
+    private List<Technology> technologies;
 }
