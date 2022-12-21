@@ -137,9 +137,8 @@ public class LanguageManager implements LanguageService {
 
       for (Technology tech : language.getTechnologies()) {
         TechnologyListResponse technologyListResponse = new TechnologyListResponse();
-        Technology technologyById = this.technologyService.getTechnologyById(tech.getId());
-        technologyListResponse.setId(technologyById.getId());
-        technologyListResponse.setName(technologyById.getName());
+        technologyListResponse.setId(tech.getId());
+        technologyListResponse.setName(tech.getName());
         technologyListResponses.add(technologyListResponse);
       }
       languageListResponse.setTechnologyListResponses(technologyListResponses);
